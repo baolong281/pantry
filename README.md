@@ -6,5 +6,5 @@
 - [ ] image upload
 - [ ] AI features
 - [ ] image classification
-- [ ] different usernames
+- [x] different usernames
 - [ ] recipes page

@@ -59,8 +59,10 @@ export function CreatePantryItem({ options, user }: CreatePantryItemProps) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild className="h-13 w-1/6">
-        <Button variant="outline">Add New Item + </Button>
+      <DialogTrigger asChild className="h-13 w-1/6 text-xs lg:text-lg">
+        <Button variant="outline" className="w-fit">
+          Add New Item +{" "}
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

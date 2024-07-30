@@ -1,6 +1,10 @@
 import "@/styles/globals.css";
 import { DM_Sans } from "next/font/google";
 import { Space_Mono } from "next/font/google";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+
+import { fileRouter } from "@/app/api/uploadthing/core";
 
 const DMSans = DM_Sans({
   subsets: ["latin"],
@@ -16,7 +20,6 @@ const SpaceMono = Space_Mono({
 });
 
 import { type Metadata } from "next";
-import { SideNavigationBar } from "@/_components/dashboard";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
@@ -34,6 +37,7 @@ export default function RootLayout({
       className={`${DMSans.variable} ${SpaceMono.className} text-primary-foreground`}
     >
       <body>
+        <NextSSRPlugin routerConfig={extractRouterConfig(fileRouter)} />
         <main className="flex min-h-screen flex-col">
           {children}
           <Toaster />

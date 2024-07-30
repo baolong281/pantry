@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { generateReactHelpers } from "@uploadthing/react/hooks";
+import type { fileRouter as OurFileRouter } from "@/app/api/uploadthing/core";
 import {
   FileUploader,
   FileUploaderContent,
@@ -8,6 +10,12 @@ import {
   FileInput,
 } from "@/components/ui/image-dropzone";
 import { Paperclip } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
+import { useToast } from "@/components/ui/use-toast";
+import { ClientUploadedFileData } from "uploadthing/types";
+import { DropzoneOptions } from "react-dropzone";
+
+const { useUploadThing } = generateReactHelpers<OurFileRouter>();
 
 const FileSvgDraw = () => {
   return (
@@ -36,19 +44,59 @@ const FileSvgDraw = () => {
   );
 };
 
-const ImageUploader = () => {
-  const [files, setFiles] = useState<File[] | null>(null);
+interface ImageUploaderProps {
+  onUploadComplete: (
+    res: ClientUploadedFileData<{ uploadedBy: number }>,
+  ) => void;
+}
 
-  const dropZoneConfig = {
-    maxFiles: 5,
+const ImageUploader = ({ onUploadComplete }: ImageUploaderProps) => {
+  const [files, setFiles] = useState<File[]>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
+  const { toast } = useToast();
+
+  const { startUpload, permittedFileInfo } = useUploadThing("imageUploader", {
+    onClientUploadComplete: (res) => {
+      if (res) {
+        setUploadedFiles((prev) => [...prev, ...res.map((file) => file.url)]);
+        console.log("Files uploaded successfully!");
+        toast({
+          title: "Image Uploaded",
+          description: "Your image  been uploaded successfully",
+        });
+        setUploadProgress(0);
+        onUploadComplete(res[0]!);
+      }
+    },
+    onUploadError: (error) => {
+      console.error("Error uploading file:", error);
+    },
+    onUploadProgress: (progress) => {
+      setUploadProgress(progress);
+    },
+  });
+
+  const handleFilesChange = useCallback(
+    (newFiles: File[] | null) => {
+      if (newFiles) {
+        setFiles(newFiles);
+        startUpload(newFiles);
+      }
+    },
+    [startUpload],
+  );
+
+  const dropZoneConfig: DropzoneOptions = {
+    maxFiles: 1,
     maxSize: 1024 * 1024 * 4,
-    multiple: true,
+    multiple: false,
   };
 
   return (
     <FileUploader
       value={files}
-      onValueChange={setFiles}
+      onValueChange={handleFilesChange}
       dropzoneOptions={dropZoneConfig}
       className="relative rounded-lg bg-background p-2"
     >
@@ -58,14 +106,15 @@ const ImageUploader = () => {
         </div>
       </FileInput>
       <FileUploaderContent>
-        {files &&
-          files.length > 0 &&
-          files.map((file, i) => (
-            <FileUploaderItem key={i} index={i}>
+        {files.map((file, i) => (
+          <div key={i} className="mb-2">
+            <FileUploaderItem index={i}>
               <Paperclip className="h-4 w-4 stroke-current" />
               <span>{file.name}</span>
             </FileUploaderItem>
-          ))}
+            <Progress value={uploadProgress} className="mt-1 h-1 w-full" />
+          </div>
+        ))}
       </FileUploaderContent>
     </FileUploader>
   );

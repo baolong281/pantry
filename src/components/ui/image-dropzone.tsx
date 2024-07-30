@@ -289,7 +289,7 @@ export const FileUploaderItem = forwardRef<
       ref={ref}
       className={cn(
         buttonVariants({ variant: "ghost" }),
-        "relative h-6 cursor-pointer justify-between p-1",
+        "relative h-6 w-full cursor-pointer justify-between p-1",
         className,
         isSelected ? "bg-muted" : "",
       )}
@@ -300,10 +300,7 @@ export const FileUploaderItem = forwardRef<
       </div>
       <button
         type="button"
-        className={cn(
-          "absolute",
-          direction === "rtl" ? "left-1 top-1" : "right-1 top-1",
-        )}
+        className={cn("absolute right-2")}
         onClick={() => removeFileFromSet(index)}
       >
         <span className="sr-only">remove item {index}</span>

@@ -3,7 +3,7 @@ import { CookingPot, Croissant } from "lucide-react";
 
 function SideNavigationBar() {
   return (
-    <aside className="h-screen w-48 border-r">
+    <aside className="hidden h-screen w-48 border-r md:flex">
       <nav className="space-y-4 border-t p-4">
         <div className="flex items-center gap-6">
           <Croissant className="h-5 w-5" />
