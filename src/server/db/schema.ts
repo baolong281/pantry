@@ -25,7 +25,7 @@ export const items = createTable(
     id: serial("id").primaryKey(),
     name: varchar("name", { length: 256 }).notNull(),
     userId: integer("user_id").notNull(),
-    image: varchar("image", { length: 256 }),
+    image: varchar("image", { length: 256 }).notNull(),
     quantity: integer("quantity").notNull().default(1),
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
@@ -38,7 +38,7 @@ export const items = createTable(
 
 export const users = createTable("users", {
   id: serial("id").primaryKey(),
-  name: varchar("name", { length: 256 }),
+  name: varchar("name", { length: 256 }).notNull(),
   createdAt: timestamp("created_at", { withTimezone: true })
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
