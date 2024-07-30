@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -13,9 +14,20 @@ import { Label } from "@/components/ui/label";
 import ImageUploader from "./imageUpload";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { AutoComplete } from "@/components/autocomplete";
+import type { Option } from "@/components/autocomplete";
+import { useToast } from "@/components/ui/use-toast";
 
-export function CreatePantryItem() {
+interface CreatePantryItemProps {
+  options: Option[];
+}
+
+export function CreatePantryItem({ options }: CreatePantryItemProps) {
   const router = useRouter();
+  const [name, setName] = useState<Option>();
+  const [quantity, setQuantity] = useState("1");
+  const [open, setOpen] = useState(false);
+  const { toast } = useToast();
 
   const handleSubmit = async () => {
     const res = await fetch("/api/items", {
@@ -24,7 +36,7 @@ export function CreatePantryItem() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: name,
+        name: name?.value,
         image: "",
         quantity: Number(quantity),
         username: "dylan",
@@ -32,15 +44,17 @@ export function CreatePantryItem() {
     });
 
     if (res.ok) {
+      toast({
+        title: "Item Added ✅",
+        description: "Item has been added to your pantry",
+      });
       router.refresh();
+      setOpen(false);
     }
   };
 
-  const [name, setName] = useState("");
-  const [quantity, setQuantity] = useState("1");
-
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild className="h-13 w-1/6">
         <Button variant="outline">Add New Item + </Button>
       </DialogTrigger>
@@ -61,12 +75,17 @@ export function CreatePantryItem() {
             <Label htmlFor="name" className="text-right">
               Item Name
             </Label>
-            <Input
-              id="name"
-              className="col-span-3"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+            <div className="col-span-3">
+              <AutoComplete
+                options={options}
+                emptyMessage="No items found"
+                placeholder="Search for items"
+                value={name}
+                onValueChange={setName}
+                disabled={false}
+                isLoading={false}
+              ></AutoComplete>
+            </div>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">

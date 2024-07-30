@@ -17,6 +17,7 @@ const SpaceMono = Space_Mono({
 
 import { type Metadata } from "next";
 import { SideNavigationBar } from "@/_components/dashboard";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Pantry",
@@ -48,6 +49,7 @@ export default function RootLayout({
               {children}
             </main>
           </div>
+          <Toaster />
         </main>
       </body>
     </html>
