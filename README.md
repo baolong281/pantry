@@ -1,6 +1,10 @@
-- [] connect with database
-- [] image upload
+- [x] connect with database
 - [x] base ui with fake data
 - [x] deployed to vercel
-- [ ] add drizzle
-- [ ] client side filters and search
+- [x] add drizzle
+- [x] client side filters and search
+- [ ] image upload
+- [ ] AI features
+- [ ] image classification
+- [ ] different usernames
+- [ ] recipes page
