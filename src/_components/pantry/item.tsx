@@ -20,7 +20,7 @@ export interface PantryItemProps {
 
 export function PantryItem(props: PantryItemProps) {
   return (
-    <Card className="w-[300px]">
+    <Card className="w-full">
       <CardHeader>
         <CardTitle className="flex justify-between font-dmSans">
           <div>{props.name}</div>{" "}

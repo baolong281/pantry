@@ -11,7 +11,7 @@ interface SearchBarProps {
 
 export function SearchBar({ options, value, onValueChange }: SearchBarProps) {
   return (
-    <div className="relative">
+    <div className="relative h-full w-full">
       <AutoComplete
         options={options}
         emptyMessage="No items found"
