@@ -32,9 +32,10 @@ export function PantryItem(props: PantryItemProps) {
         <Image
           src={props.image}
           alt={props.name}
-          height={24}
-          width={24}
-          className="h-40 w-40 rounded-md"
+          style={{ objectFit: "contain" }}
+          height={40}
+          width={40}
+          className="h-32 w-32 rounded-md object-contain"
         />
       </CardContent>
       <CardFooter className="flex justify-between">

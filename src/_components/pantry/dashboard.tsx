@@ -38,7 +38,7 @@ export function PantryDashboard({ items }: PantryDashboardProps) {
           onValueChange={setSearchValue}
         />
       </div>
-      <div className="-mb-4 gap-8 p-8 pb-0 pl-10">
+      <div className="-mb-4 gap-8 p-8 pb-0 pl-12">
         <CreatePantryItem />
       </div>
       <div className="col-span-1 grid gap-4 p-8 md:grid-cols-3 lg:grid-cols-5">
