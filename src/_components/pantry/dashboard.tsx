@@ -8,6 +8,7 @@ import { CreatePantryItem } from "./create";
 
 export interface PantryDashboardProps {
   items: PantryItemProps[];
+  user: string;
 }
 
 const validSearch = (
@@ -21,7 +22,7 @@ const validSearch = (
   return item.name.toLowerCase().includes(searchValue.label.toLowerCase());
 };
 
-export function PantryDashboard({ items }: PantryDashboardProps) {
+export function PantryDashboard({ items, user }: PantryDashboardProps) {
   const [searchValue, setSearchValue] = useState<Option>();
 
   const options = items.map((item) => ({
@@ -39,7 +40,7 @@ export function PantryDashboard({ items }: PantryDashboardProps) {
         />
       </div>
       <div className="-mb-4 gap-8 p-8 pb-0 pl-12">
-        <CreatePantryItem options={options} />
+        <CreatePantryItem options={options} user={user} />
       </div>
       <div className="col-span-1 grid gap-4 p-8 md:grid-cols-3 lg:grid-cols-5">
         {items.map((item) => {

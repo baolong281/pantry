@@ -20,9 +20,10 @@ import { useToast } from "@/components/ui/use-toast";
 
 interface CreatePantryItemProps {
   options: Option[];
+  user: string;
 }
 
-export function CreatePantryItem({ options }: CreatePantryItemProps) {
+export function CreatePantryItem({ options, user }: CreatePantryItemProps) {
   const router = useRouter();
   const [name, setName] = useState<Option>();
   const [quantity, setQuantity] = useState("1");
@@ -30,16 +31,18 @@ export function CreatePantryItem({ options }: CreatePantryItemProps) {
   const { toast } = useToast();
 
   const handleSubmit = async () => {
+    console.log(user);
     const res = await fetch("/api/items", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+
       body: JSON.stringify({
         name: name?.value,
         image: "",
         quantity: Number(quantity),
-        username: "dylan",
+        username: user,
       }),
     });
 
