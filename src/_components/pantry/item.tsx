@@ -35,7 +35,7 @@ export function PantryItem(props: PantryItemProps) {
           style={{ objectFit: "contain" }}
           height={40}
           width={40}
-          className="h-32 w-32 rounded-md object-contain"
+          className="h-36 w-36 rounded-md object-contain"
         />
       </CardContent>
       <CardFooter className="flex justify-between">
