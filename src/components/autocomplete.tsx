@@ -62,6 +62,7 @@ export const AutoComplete = ({
         if (optionToSelect) {
           setSelected(optionToSelect);
           onValueChange?.(optionToSelect);
+          // setInputValue(optionToSelect.value);
         }
       }
 

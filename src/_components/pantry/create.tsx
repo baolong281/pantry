@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -17,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { AutoComplete } from "@/components/autocomplete";
 import type { Option } from "@/components/autocomplete";
 import { useToast } from "@/components/ui/use-toast";
+import { ClientUploadedFileData } from "uploadthing/types";
 
 interface CreatePantryItemProps {
   options: Option[];
@@ -30,9 +30,19 @@ export function CreatePantryItem({ options, user }: CreatePantryItemProps) {
   const [quantity, setQuantity] = useState("1");
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState<string>("");
+  const [image, setImage] = useState<string>("");
   const { toast } = useToast();
 
+  const onUploadComplete = (
+    res: ClientUploadedFileData<{ uploadedBy: number }>,
+  ) => {
+    res.url && setImage(res.url);
+  };
+
   const handleSubmit = async () => {
+    if (!inputValue) return;
+    if (!image) return;
+
     const res = await fetch("/api/items", {
       method: "POST",
       headers: {
@@ -41,7 +51,7 @@ export function CreatePantryItem({ options, user }: CreatePantryItemProps) {
 
       body: JSON.stringify({
         name: inputValue,
-        image: "",
+        image: image,
         quantity: Number(quantity),
         username: user,
       }),
@@ -74,7 +84,7 @@ export function CreatePantryItem({ options, user }: CreatePantryItemProps) {
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <div className="col-span-4">
-              <ImageUploader />
+              <ImageUploader onUploadComplete={onUploadComplete} />
             </div>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
