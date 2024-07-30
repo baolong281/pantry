@@ -16,3 +16,15 @@ export async function getItems(userName: string) {
   });
   return items;
 }
+
+export async function checkUsername(username: string) {
+  const user = await db.query.users.findFirst({
+    where: (model, { eq }) => eq(model.name, username),
+  });
+
+  if (!user) {
+    return false;
+  }
+
+  return true;
+}

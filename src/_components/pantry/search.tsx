@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { AutoComplete } from "@/components/autocomplete";
 import type { Option } from "@/components/autocomplete";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,8 @@ interface SearchBarProps {
 }
 
 export function SearchBar({ options, value, onValueChange }: SearchBarProps) {
+  const [inputValue, setInputValue] = useState<string>(value?.label || "");
+
   return (
     <div className="relative h-full w-full">
       <AutoComplete
@@ -20,6 +23,8 @@ export function SearchBar({ options, value, onValueChange }: SearchBarProps) {
         onValueChange={onValueChange}
         disabled={false}
         isLoading={false}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
       ></AutoComplete>
       <Button
         variant="outline"

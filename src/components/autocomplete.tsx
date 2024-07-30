@@ -22,6 +22,8 @@ type AutoCompleteProps = {
   isLoading?: boolean;
   disabled?: boolean;
   placeholder?: string;
+  inputValue: string;
+  setInputValue: (value: string) => void;
 };
 
 export const AutoComplete = ({
@@ -32,12 +34,13 @@ export const AutoComplete = ({
   onValueChange,
   disabled,
   isLoading = false,
+  inputValue,
+  setInputValue,
 }: AutoCompleteProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [isOpen, setOpen] = useState(false);
   const [selected, setSelected] = useState<Option>(value as Option);
-  const [inputValue, setInputValue] = useState<string>(value?.label || "");
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLDivElement>) => {
@@ -71,7 +74,9 @@ export const AutoComplete = ({
 
   const handleBlur = useCallback(() => {
     setOpen(false);
-    setInputValue(selected?.label);
+    if (selected) {
+      setInputValue(selected.label);
+    }
   }, [selected]);
 
   const handleSelectOption = useCallback(
@@ -102,6 +107,9 @@ export const AutoComplete = ({
           placeholder={placeholder}
           disabled={disabled}
           className="h-full border-none text-base"
+          onKeyDown={(event: KeyboardEvent<HTMLInputElement>) => {
+            setInputValue(event.currentTarget.value);
+          }}
         />
       </div>
       <div className="relative mt-1">

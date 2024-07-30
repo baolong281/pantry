@@ -25,13 +25,14 @@ interface CreatePantryItemProps {
 
 export function CreatePantryItem({ options, user }: CreatePantryItemProps) {
   const router = useRouter();
+
   const [name, setName] = useState<Option>();
   const [quantity, setQuantity] = useState("1");
   const [open, setOpen] = useState(false);
+  const [inputValue, setInputValue] = useState<string>("");
   const { toast } = useToast();
 
   const handleSubmit = async () => {
-    console.log(user);
     const res = await fetch("/api/items", {
       method: "POST",
       headers: {
@@ -39,7 +40,7 @@ export function CreatePantryItem({ options, user }: CreatePantryItemProps) {
       },
 
       body: JSON.stringify({
-        name: name?.value,
+        name: inputValue,
         image: "",
         quantity: Number(quantity),
         username: user,
@@ -49,7 +50,7 @@ export function CreatePantryItem({ options, user }: CreatePantryItemProps) {
     if (res.ok) {
       toast({
         title: "Item Added ✅",
-        description: "Item has been added to your pantry",
+        description: `${Number(quantity)} ${inputValue} has been added to your pantry`,
       });
       router.refresh();
       setOpen(false);
@@ -87,6 +88,8 @@ export function CreatePantryItem({ options, user }: CreatePantryItemProps) {
                 onValueChange={setName}
                 disabled={false}
                 isLoading={false}
+                inputValue={inputValue}
+                setInputValue={setInputValue}
               ></AutoComplete>
             </div>
           </div>
