@@ -1,0 +1,27 @@
+<annotation>
+	<folder></folder>
+	<filename>IMG_20220219_181248_jpg.rf.7037d7f8b1590035e98719054b2a5619.jpg</filename>
+	<path>IMG_20220219_181248_jpg.rf.7037d7f8b1590035e98719054b2a5619.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>640</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Juice</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>215</xmin>
+			<xmax>352</xmax>
+			<ymin>155</ymin>
+			<ymax>403</ymax>
+		</bndbox>
+	</object>
+</annotation>

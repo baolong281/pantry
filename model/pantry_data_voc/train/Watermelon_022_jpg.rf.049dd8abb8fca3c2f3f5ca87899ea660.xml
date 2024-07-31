@@ -1,0 +1,27 @@
+<annotation>
+	<folder></folder>
+	<filename>Watermelon_022_jpg.rf.049dd8abb8fca3c2f3f5ca87899ea660.jpg</filename>
+	<path>Watermelon_022_jpg.rf.049dd8abb8fca3c2f3f5ca87899ea660.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>640</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Watermelon</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>21</xmin>
+			<xmax>541</xmax>
+			<ymin>80</ymin>
+			<ymax>612</ymax>
+		</bndbox>
+	</object>
+</annotation>

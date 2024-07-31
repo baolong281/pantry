@@ -1,0 +1,27 @@
+<annotation>
+	<folder></folder>
+	<filename>IMG_20220219_184831_jpg.rf.57a0c01367841318fea49ccc7985404c.jpg</filename>
+	<path>IMG_20220219_184831_jpg.rf.57a0c01367841318fea49ccc7985404c.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>640</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Corn</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>307</xmin>
+			<xmax>464</xmax>
+			<ymin>97</ymin>
+			<ymax>299</ymax>
+		</bndbox>
+	</object>
+</annotation>

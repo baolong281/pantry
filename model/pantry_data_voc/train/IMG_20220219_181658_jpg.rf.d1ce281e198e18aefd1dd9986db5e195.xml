@@ -1,0 +1,27 @@
+<annotation>
+	<folder></folder>
+	<filename>IMG_20220219_181658_jpg.rf.d1ce281e198e18aefd1dd9986db5e195.jpg</filename>
+	<path>IMG_20220219_181658_jpg.rf.d1ce281e198e18aefd1dd9986db5e195.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>640</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Tofu</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>202</xmin>
+			<xmax>640</xmax>
+			<ymin>97</ymin>
+			<ymax>415</ymax>
+		</bndbox>
+	</object>
+</annotation>

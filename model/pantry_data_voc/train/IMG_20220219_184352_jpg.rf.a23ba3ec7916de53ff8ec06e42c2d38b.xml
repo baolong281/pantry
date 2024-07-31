@@ -1,0 +1,27 @@
+<annotation>
+	<folder></folder>
+	<filename>IMG_20220219_184352_jpg.rf.a23ba3ec7916de53ff8ec06e42c2d38b.jpg</filename>
+	<path>IMG_20220219_184352_jpg.rf.a23ba3ec7916de53ff8ec06e42c2d38b.jpg</path>
+	<source>
+		<database>roboflow.com</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>640</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Cheese</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<occluded>0</occluded>
+		<bndbox>
+			<xmin>345</xmin>
+			<xmax>641</xmax>
+			<ymin>368</ymin>
+			<ymax>592</ymax>
+		</bndbox>
+	</object>
+</annotation>
