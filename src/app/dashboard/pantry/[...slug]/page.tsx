@@ -15,7 +15,7 @@ export default async function HomePage({
     name: item.name,
     image: item.image,
     amount: item.quantity,
-    attributes: ["Cooked", "Fresh"],
+    attributes: item.attributes,
   }));
 
   return <PantryDashboard items={itemsArray} user={user} />;

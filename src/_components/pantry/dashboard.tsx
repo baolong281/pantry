@@ -39,13 +39,13 @@ export function PantryDashboard({ items, user }: PantryDashboardProps) {
           onValueChange={setSearchValue}
         />
       </div>
-      <div className="-mb-4 gap-8 p-8 pb-0 pl-12">
+      <div className="-mb-4 gap-8 p-8 pb-0 pl-10">
         <CreatePantryItem options={options} user={user} />
       </div>
       <div className="col-span-1 grid gap-4 p-8 md:grid-cols-3 lg:grid-cols-5">
         {items.map((item) => {
           if (validSearch(searchValue, item)) {
-            return <PantryItem key={item.name} {...item} />;
+            return <PantryItem key={item.name} {...item} user={user} />;
           }
           return null;
         })}

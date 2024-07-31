@@ -30,6 +30,7 @@ export const items = createTable(
     createdAt: timestamp("created_at", { withTimezone: true })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
+    attributes: varchar("attributes", { length: 256 }),
   },
   (example) => ({
     nameIndex: index("name_idx").on(example.name),

@@ -7,9 +7,12 @@ export default function DashboardLayout({ children }: any) {
         <h1 className="scroll-m-20 pb-2 font-dmSans text-4xl font-extrabold tracking-tight lg:text-4xl">
           Pantry App
         </h1>
-        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+        <a
+          className="scroll-m-20 text-2xl font-semibold tracking-tight text-blue-600 hover:underline"
+          href="https://github.com/baolong281/pantry"
+        >
           github
-        </h3>
+        </a>
       </header>
       <div className="flex h-full w-full">
         <SideNavigationBar />

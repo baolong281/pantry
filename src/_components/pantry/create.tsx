@@ -31,6 +31,8 @@ export function CreatePantryItem({ options, user }: CreatePantryItemProps) {
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [image, setImage] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [attributes, setAttributes] = useState<string>("");
   const { toast } = useToast();
 
   const onUploadComplete = (
@@ -40,8 +42,14 @@ export function CreatePantryItem({ options, user }: CreatePantryItemProps) {
   };
 
   const handleSubmit = async () => {
-    if (!inputValue) return;
-    if (!image) return;
+    if (!inputValue) {
+      setError("Please enter a name");
+      return;
+    }
+    if (!image) {
+      setError("Please upload an image");
+      return;
+    }
 
     const res = await fetch("/api/items", {
       method: "POST",
@@ -54,10 +62,16 @@ export function CreatePantryItem({ options, user }: CreatePantryItemProps) {
         image: image,
         quantity: Number(quantity),
         username: user,
+        attributes: attributes,
       }),
     });
 
     if (res.ok) {
+      setAttributes("");
+      setQuantity("1");
+      setInputValue("");
+      setImage("");
+
       toast({
         title: "Item Added ✅",
         description: `${Number(quantity)} ${inputValue} has been added to your pantry`,
@@ -106,6 +120,19 @@ export function CreatePantryItem({ options, user }: CreatePantryItemProps) {
             </div>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="text-right">
+              Atributes
+            </Label>
+            <div className="col-span-3">
+              <Input
+                id="username"
+                className="col-span-3"
+                value={attributes}
+                onChange={(e) => setAttributes(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
               Quantity
             </Label>
@@ -117,7 +144,8 @@ export function CreatePantryItem({ options, user }: CreatePantryItemProps) {
             />
           </div>
         </div>
-        <DialogFooter>
+        <DialogFooter className="flex justify-between align-middle">
+          {error && <p className="mr-auto text-red-500">{error}</p>}
           <Button type="submit" onClick={handleSubmit}>
             Add Item
           </Button>

@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   // read the request body which is json
   const body = await req.json();
-  const { name, image, quantity, username } = body;
+  const { name, image, quantity, username, attributes } = body;
 
   const user = await db
     .select()
@@ -23,6 +23,10 @@ export async function POST(req: Request) {
 
   const item = await incrementItem(name, quantity, user[0]!.id);
 
+  if (item && item[0]!.quantity <= 0) {
+    await deleteItem(name, user[0]!.id);
+  }
+
   if (item) {
     return new NextResponse(JSON.stringify(item), { status: 200 });
   }
@@ -35,6 +39,7 @@ export async function POST(req: Request) {
         image: image,
         quantity: quantity,
         userId: user[0]!.id,
+        attributes: attributes,
       })
       .returning();
 
@@ -47,6 +52,13 @@ export async function POST(req: Request) {
       },
     );
   }
+}
+
+async function deleteItem(name: string, userId: number) {
+  await db
+    .delete(items)
+    .where(and(eq(items.name, name), eq(items.userId, userId)))
+    .execute();
 }
 
 async function incrementItem(name: string, quantity: number, userId: number) {
